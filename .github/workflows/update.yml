@@ -1,8 +1,14 @@
-name: Update News & Deploy
+name: Pulse — 新闻更新 & 部署
 
 on:
+  # 每日三次：北京时间 08:00 / 12:00 / 18:00
+  # （UTC 时间：00:00 / 04:00 / 10:00）
   schedule:
-    - cron: '0 */8 * * *'
+    - cron: '0 0 * * *'   # 北京 08:00
+    - cron: '0 4 * * *'   # 北京 12:00
+    - cron: '0 10 * * *'  # 北京 18:00
+
+  # 允许手动触发
   workflow_dispatch:
 
 permissions:
@@ -15,33 +21,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Checkout
+      - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: 🐍 Setup Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: pip install requests
 
-      - name: Fetch news & build HTML
+      - name: 📰 Fetch news & build HTML
         env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: python fetch.py
 
-      - name: Setup Pages
+      - name: 🔧 Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: 📤 Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
 
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
