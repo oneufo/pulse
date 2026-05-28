@@ -1,14 +1,10 @@
 name: Pulse — 新闻更新 & 部署
 
 on:
-  # 每日三次：北京时间 08:00 / 12:00 / 18:00
-  # （UTC 时间：00:00 / 04:00 / 10:00）
   schedule:
-    - cron: '0 0 * * *'   # 北京 08:00
-    - cron: '0 4 * * *'   # 北京 12:00
-    - cron: '0 10 * * *'  # 北京 18:00
-
-  # 允许手动触发
+    - cron: '0 0 * * *'    # 北京 08:00
+    - cron: '0 4 * * *'    # 北京 12:00
+    - cron: '0 10 * * *'   # 北京 18:00
   workflow_dispatch:
 
 permissions:
@@ -39,7 +35,7 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install requests
 
-      - name: 📰 Fetch news & build HTML
+      - name: 📰 Fetch & build
         env:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: python fetch.py
@@ -52,6 +48,6 @@ jobs:
         with:
           path: '.'
 
-      - name: 🚀 Deploy to GitHub Pages
+      - name: 🚀 Deploy
         id: deployment
         uses: actions/deploy-pages@v5
