@@ -28,11 +28,13 @@ RSS_SOURCES = {
         "https://feeds.reuters.com/Reuters/PoliticsNews",
         "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
         "https://feeds.washingtonpost.com/rss/politics",
-        "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://www.politico.com/rss/politicopicks.xml",
         "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
-        "https://www.aljazeera.com/xml/rss/all.xml",
+        "https://www.politico.com/rss/politicopicks.xml",
+        "https://apnews.com/rss",
+        "https://www.theguardian.com/world/rss",
         "https://foreignpolicy.com/feed/",
+        "https://www.aljazeera.com/xml/rss/all.xml",
+        "https://www.spiegel.de/international/index.rss",
     ],
     "business": [
         "https://feeds.reuters.com/reuters/businessNews",
@@ -57,22 +59,23 @@ RSS_SOURCES = {
     "science": [
         "https://www.nature.com/nature.rss",
         "https://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
-        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+        "https://www.science.org/rss/news_current.xml",
         "https://feeds.reuters.com/reuters/scienceNews",
         "https://www.newscientist.com/feed/home/",
         "https://phys.org/rss-feed/",
         "https://www.sciencedaily.com/rss/top.xml",
+        "https://www.scientificamerican.com/feed/",
         "https://feeds.nationalgeographic.com/ng/News/News_Main",
     ],
     "health": [
         "https://rss.nytimes.com/services/xml/rss/nyt/Health.xml",
-        "https://feeds.bbci.co.uk/news/health/rss.xml",
-        "https://feeds.reuters.com/reuters/healthNews",
         "https://www.statnews.com/feed/",
+        "https://feeds.reuters.com/reuters/healthNews",
+        "https://www.nejm.org/action/showFeed?type=etoc&feed=rss&jc=nejm",
+        "https://www.thelancet.com/rssfeed/lancet_online.xml",
         "https://www.medscape.com/rss/news",
         "https://feeds.webmd.com/rss/rss.aspx?RSSSource=RSS_PUBLIC",
         "https://www.medicalnewstoday.com/rss",
-        "https://www.healthday.com/news/rss.xml",
     ],
 }
 
@@ -158,12 +161,14 @@ LOW_VALUE = [
     "opinion:", "editorial:", "letters:", "dear",
 ]
 PRESTIGE_DOMAINS = [
-    "reuters.com", "nytimes.com", "washingtonpost.com", "bbc.co.uk",
-    "bbc.com", "bloomberg.com", "ft.com", "economist.com",
+    "reuters.com", "nytimes.com", "washingtonpost.com",
+    "bloomberg.com", "ft.com", "economist.com",
     "wsj.com", "theguardian.com", "apnews.com", "politico.com",
-    "nature.com", "science.org", "statnews.com", "axios.com",
-    "foreignpolicy.com", "aljazeera.com", "technologyreview.com",
-    "wired.com", "arstechnica.com",
+    "nature.com", "science.org", "newscientist.com", "scientificamerican.com",
+    "statnews.com", "nejm.org", "thelancet.com",
+    "axios.com", "foreignpolicy.com", "aljazeera.com",
+    "technologyreview.com", "wired.com", "arstechnica.com",
+    "spiegel.de",
 ]
 
 # ════════════════════════════════════════════════════════════
@@ -411,10 +416,12 @@ def fetch_headline(global_seen):
         "https://feeds.reuters.com/reuters/businessNews",
         "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
         "https://feeds.washingtonpost.com/rss/world",
-        "https://feeds.bbci.co.uk/news/world/rss.xml",
         "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
-        "https://www.aljazeera.com/xml/rss/all.xml",
+        "https://apnews.com/rss",
+        "https://www.theguardian.com/world/rss",
         "https://feeds.bloomberg.com/markets/news.rss",
+        "https://www.economist.com/the-world-this-week/rss.xml",
+        "https://www.spiegel.de/international/index.rss",
     ]
     seen = set()
     for feed in priority_feeds:
