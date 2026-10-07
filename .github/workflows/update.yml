@@ -1,4 +1,4 @@
-name: Pulse — 新闻更新 & 部署.
+name: Pulse — 新闻更新 & 部署
 
 on:
   schedule:
